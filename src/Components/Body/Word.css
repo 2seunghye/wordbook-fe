@@ -1,0 +1,22 @@
+.word-card h2 {
+  font-size: 30px;
+  color: red;
+}
+
+.word-card {
+  box-sizing: border-box;
+  border: 1px solid #333;
+  cursor: pointer;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hidden span {
+  visibility: hidden;
+}
+
+.meaning span {
+  color: yellowgreen;
+  font-weight: 700;
+}

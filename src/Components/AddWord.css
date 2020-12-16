@@ -1,0 +1,26 @@
+.addWordForm {
+  border: 1px solid #333;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.addWordForm h2 {
+  font-size: 20px;
+  padding: 10px;
+  margin: 0;
+}
+
+.addWordForm input {
+  width: 30%;
+  height: 12.5px;
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.addWordForm button {
+  width: 20%;
+  height: 36px;
+  padding: 10px;
+}
