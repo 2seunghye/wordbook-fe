@@ -4,7 +4,6 @@ import WordBook from './WordBook';
 class GroupWordBookList extends Component {
   render() {
     const groupWordBookList = this.props.groupWordBookList;
-    console.log(groupWordBookList);
 
     return (
       <div>

@@ -16,7 +16,7 @@ class WordList extends React.Component {
     return (
       <div>
         {wordList.map((word, index) => (
-          <Word key={index} voca={word.voca} meaning={word.meaning} onRemoveWord={onRemoveWord} />
+          <Word key={index} id={word.id} voca={word.voca} meaning={word.meaning} onRemoveWord={onRemoveWord} />
         ))}
       </div>
     );

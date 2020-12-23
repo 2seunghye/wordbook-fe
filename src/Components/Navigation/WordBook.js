@@ -6,7 +6,6 @@ class WordBook extends React.Component {
     return (
       <div>
         <div>{wordBook.wordBookId}</div>
-        <div></div>
       </div>
     );
   }
