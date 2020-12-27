@@ -2,9 +2,9 @@ import React from 'react';
 import Word from './Word';
 
 class WordList extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   onUpdate = () => {
     const newArr = this.props.wordList;
@@ -12,11 +12,11 @@ class WordList extends React.Component {
   };
 
   render() {
-    const { wordList, onRemoveWord } = this.props;
+    const { wordList, onRemoveWord, onReviseWord } = this.props;
     return (
       <div>
         {wordList.map((word, index) => (
-          <Word key={index} id={word.id} voca={word.voca} meaning={word.meaning} onRemoveWord={onRemoveWord} />
+          <Word key={index} id={word.id} voca={word.voca} meaning={word.meaning} onRemoveWord={onRemoveWord} onReviseWord={onReviseWord} />
         ))}
       </div>
     );

@@ -1,10 +1,12 @@
 import React from 'react';
 import './Word.css';
+import WordView from './WordView';
+import ModifyWord from './ModifyWord';
 
 class Word extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: this.props.isOpen };
+    this.state = { isOpen: this.props.isOpen, isBeenModifying: false };
   }
 
   handleClick = () => {
@@ -13,23 +15,29 @@ class Word extends React.Component {
     }));
   };
 
+  onToggleIsBeenModifying = () => {
+    this.setState((state) => ({
+      isBeenModifying: !state.isBeenModifying,
+    }));
+  };
+
   render() {
-    const { voca, meaning, onRemoveWord, id } = this.props;
-    const { isOpen } = this.state;
+    const { voca, meaning, onRemoveWord, id, onReviseWord } = this.props;
+    const { isOpen, isBeenModifying } = this.state;
 
     return (
       <div>
-        <div className="word-card" onClick={this.handleClick}>
-          <div className="voca">
-            <span>{voca}</span>
-          </div>
-          <div className={isOpen ? 'meaning' : 'meaning hidden'}>
-            <span>{meaning}</span>
-          </div>
-        </div>
-        <button type="button" onClick={() => onRemoveWord(id)}>
-          삭제버튼
-        </button>
+        {isBeenModifying ? (
+          <ModifyWord
+            onToggleIsBeenModifying={this.onToggleIsBeenModifying}
+            voca={voca}
+            meaning={meaning}
+            id={id}
+            onReviseWord={onReviseWord}
+          />
+        ) : (
+          <WordView onToggleIsBeenModifying={this.onToggleIsBeenModifying} voca={voca} meaning={meaning} id={id} />
+        )}
       </div>
     );
   }

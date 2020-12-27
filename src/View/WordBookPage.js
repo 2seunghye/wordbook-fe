@@ -27,10 +27,22 @@ class WordBook extends React.Component {
       <div>
         <Navigation />
         <AddWord onChangeWords={this.onChangeWords} />
-        <WordList wordList={this.state.words} onRemoveWord={this.onRemoveWord} />
+        <WordList onReviseWord={this.onReviseWord} wordList={this.state.words} onRemoveWord={this.onRemoveWord} />
       </div>
     );
   }
+
+  onReviseWord = (newWord) => {
+    const newWords = this.state.words;
+    const changeIndex = newWords.findIndex((word) => word.id === newWord.id);
+
+    newWords[changeIndex].voca = newWord.voca;
+    newWords[changeIndex].meaning = newWord.meaning;
+
+    this.setState({
+      words: newWords,
+    });
+  };
 
   onChangeWords = (word) => {
     const newArr = this.state.words.concat(word);
