@@ -3,7 +3,7 @@ import React from 'react';
 class WordView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
+    this.state = { isOpen: this.props.word.isOpen };
   }
 
   handleClick = () => {
@@ -13,7 +13,8 @@ class WordView extends React.Component {
   };
 
   render() {
-    const { voca, meaning, onRemoveWord, id } = this.props.word;
+    const { voca, meaning, id } = this.props.word;
+    const { onRemoveWord } = this.props;
     const { isOpen } = this.state;
     return (
       <div>
@@ -21,7 +22,7 @@ class WordView extends React.Component {
           <div className="voca">
             <span>{voca}</span>
           </div>
-          <div className={isOpen ? 'meaning hidden' : 'meaning'}>
+          <div className={isOpen ? 'meaning' : 'meaning hidden'}>
             <span>{meaning}</span>
           </div>
         </div>

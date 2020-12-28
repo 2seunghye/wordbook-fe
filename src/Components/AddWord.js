@@ -27,7 +27,7 @@ class AddWord extends React.Component {
   onCreateHandler = () => {
     const { newVoca, newMeaning, id } = this.state;
     const { onChangeWords } = this.props;
-    const word = { id: id, voca: newVoca, meaning: newMeaning };
+    const word = { isOpen: false, id: id, voca: newVoca, meaning: newMeaning };
     onChangeWords(word);
     this.setState({
       id: this.id++,

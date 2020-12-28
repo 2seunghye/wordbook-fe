@@ -11,12 +11,6 @@ class Word extends React.Component {
     };
   }
 
-  handleClick = () => {
-    this.setState((state) => ({
-      isOpen: !state.isOpen,
-    }));
-  };
-
   onToggleIsBeenModifying = () => {
     this.setState((state) => ({
       isBeenModifying: !state.isBeenModifying,
@@ -24,7 +18,7 @@ class Word extends React.Component {
   };
 
   render() {
-    const { word, onReviseWord } = this.props;
+    const { word, onReviseWord, onRemoveWord } = this.props;
     const { isBeenModifying } = this.state;
 
     return (
@@ -32,7 +26,7 @@ class Word extends React.Component {
         {isBeenModifying ? (
           <ModifyWord onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} onReviseWord={onReviseWord} />
         ) : (
-          <WordView onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} />
+          <WordView onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} onRemoveWord={onRemoveWord} />
         )}
       </div>
     );

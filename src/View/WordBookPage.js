@@ -9,11 +9,13 @@ class WordBook extends React.Component {
     this.state = {
       words: [
         {
+          isOpen: false,
           id: 0,
           voca: 'apple',
           meaning: '사과',
         },
         {
+          isOpen: false,
           id: 1,
           voca: 'banana',
           meaning: '바나나',
@@ -33,11 +35,9 @@ class WordBook extends React.Component {
   }
 
   onReviseWord = (newWord) => {
-    const newWords = this.state.words;
-    const changeIndex = newWords.findIndex((word) => word.id === newWord.id);
-
-    newWords[changeIndex].voca = newWord.voca;
-    newWords[changeIndex].meaning = newWord.meaning;
+    const newWords = this.state.words.map((word) => {
+      return word.id === newWord.id ? newWord : word;
+    });
 
     this.setState({
       words: newWords,
