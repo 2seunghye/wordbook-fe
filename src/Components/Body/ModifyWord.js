@@ -4,9 +4,8 @@ class ModifyWord extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      newVoca: this.props.voca,
-      newMeaning: this.props.meaning,
+      voca: this.props.word.voca,
+      meaning: this.props.word.meaning,
     };
   }
 
@@ -16,26 +15,29 @@ class ModifyWord extends React.Component {
     });
   };
 
-  onCreateHandler = () => {
-    const { newVoca, newMeaning, id } = this.state;
+  onModiftyHandler = () => {
     const { onReviseWord, onToggleIsBeenModifying } = this.props;
-    const word = { id: id, voca: newVoca, meaning: newMeaning };
+
+    const { word } = this.props;
+    word.voca = this.state.voca;
+    word.meaning = this.state.meaning;
+
     onReviseWord(word);
     onToggleIsBeenModifying();
   };
 
   render() {
-    const { newVoca, newMeaning } = this.state;
-    const { onReviseWord } = this.props;
+    const { voca, meaning } = this.state;
+
     return (
       <div>
         <div className="addWordForm">
           <h2>단어수정</h2>
           <label htmlFor="voca"></label>
-          <input type="text" id="voca" name="newVoca" onChange={this.onChangeHandler} value={newVoca} placeholder="단어" />
+          <input type="text" id="voca" name="voca" onChange={this.onChangeHandler} value={voca} placeholder="단어" />
           <label htmlFor="meaning"></label>
-          <input type="text" id="meaning" name="newMeaning" onChange={this.onChangeHandler} value={newMeaning} placeholder="뜻" />
-          <button onClick={this.onCreateHandler}>수정</button>
+          <input type="text" id="meaning" name="meaning" onChange={this.onChangeHandler} value={meaning} placeholder="뜻" />
+          <button onClick={this.onModiftyHandler}>수정</button>
           <button onClick={this.props.onToggleIsBeenModifying}>취소</button>
         </div>
       </div>

@@ -3,23 +3,17 @@ import React from 'react';
 class WordView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: this.props.isOpen };
+    this.state = { isOpen: false };
   }
 
-  onReviseWord = (newWord) => {
-    const newArr = this.state.words.map((word) => {
-      if (word.id === newWord.id) {
-        word.voca = newWord.voca;
-        word.meaning = newWord.meaning;
-      }
-    });
-    this.setState({
-      words: newArr,
-    });
+  handleClick = () => {
+    this.setState((state) => ({
+      isOpen: !state.isOpen,
+    }));
   };
 
   render() {
-    const { voca, meaning, onRemoveWord, id } = this.props;
+    const { voca, meaning, onRemoveWord, id } = this.props.word;
     const { isOpen } = this.state;
     return (
       <div>

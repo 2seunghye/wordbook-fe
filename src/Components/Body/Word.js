@@ -6,7 +6,9 @@ import ModifyWord from './ModifyWord';
 class Word extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: this.props.isOpen, isBeenModifying: false };
+    this.state = {
+      isBeenModifying: false,
+    };
   }
 
   handleClick = () => {
@@ -22,21 +24,15 @@ class Word extends React.Component {
   };
 
   render() {
-    const { voca, meaning, onRemoveWord, id, onReviseWord } = this.props;
-    const { isOpen, isBeenModifying } = this.state;
+    const { word, onReviseWord } = this.props;
+    const { isBeenModifying } = this.state;
 
     return (
       <div>
         {isBeenModifying ? (
-          <ModifyWord
-            onToggleIsBeenModifying={this.onToggleIsBeenModifying}
-            voca={voca}
-            meaning={meaning}
-            id={id}
-            onReviseWord={onReviseWord}
-          />
+          <ModifyWord onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} onReviseWord={onReviseWord} />
         ) : (
-          <WordView onToggleIsBeenModifying={this.onToggleIsBeenModifying} voca={voca} meaning={meaning} id={id} />
+          <WordView onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} />
         )}
       </div>
     );
