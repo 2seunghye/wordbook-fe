@@ -1,4 +1,5 @@
 import React from 'react';
+import './WordView.css';
 
 class WordView extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class WordView extends React.Component {
     const { onRemoveWord } = this.props;
     const { isOpen } = this.state;
     return (
-      <div>
+      <div className="WordView">
         <div className="word-card" onClick={this.handleClick}>
           <div className="voca">
             <span>{voca}</span>

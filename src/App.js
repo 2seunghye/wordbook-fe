@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import WordBook from './View/WordBookPage';
+import WordBookPage from './View/WordBookPage';
 // import InputSample from './Components/Navigation/test';
 
 class App extends React.Component {
@@ -11,8 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>단어장</h1>
-        <WordBook />
+        <WordBookPage />
       </div>
     );
   }

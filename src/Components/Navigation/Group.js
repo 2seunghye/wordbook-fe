@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GroupWordBookList from './GroupWordBookList';
+import './Group.css';
 
 class Group extends Component {
   render() {
@@ -9,8 +10,8 @@ class Group extends Component {
 
     return (
       <div>
-        <div>{groupName}</div>;
-        <GroupWordBookList groupName={groupName} groupWordBookList={groupWordBookList} />;
+        <div>{groupName}</div>
+        <GroupWordBookList groupName={groupName} groupWordBookList={groupWordBookList} />
       </div>
     );
   }

@@ -40,15 +40,13 @@ class AddWord extends React.Component {
   render() {
     const { newVoca, newMeaning } = this.state;
     return (
-      <div>
-        <div className="addWordForm">
-          <h2>단어추가</h2>
-          <label htmlFor="voca"></label>
-          <input type="text" id="voca" onChange={this.wordChangeHandler} value={newVoca} placeholder="단어" />
-          <label htmlFor="meaning"></label>
-          <input type="text" id="meaning" onChange={this.meaningChangeHandler} value={newMeaning} placeholder="뜻" />
-          <button onClick={this.onCreateHandler}>추가</button>
-        </div>
+      <div className="addWordForm">
+        <h2>단어추가</h2>
+        <label htmlFor="voca"></label>
+        <input type="text" id="voca" onChange={this.wordChangeHandler} value={newVoca} placeholder="단어" />
+        <label htmlFor="meaning"></label>
+        <input type="text" id="meaning" onChange={this.meaningChangeHandler} value={newMeaning} placeholder="뜻" />
+        <button onClick={this.onCreateHandler}>추가</button>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import UserWordBookList from './UserWordBookList';
 import GroupList from './GroupList';
+import './WordBookList.css';
 
 class WordBookList extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class WordBookList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="WordBookList">
         <UserWordBookList userWordBookList={this.state.wordBookList.userWordBookList} />
         <GroupList groupList={this.state.wordBookList.groupList} />
       </div>

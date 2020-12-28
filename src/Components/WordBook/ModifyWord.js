@@ -1,4 +1,5 @@
 import React from 'react';
+import './ModifyWord.css';
 
 class ModifyWord extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class ModifyWord extends React.Component {
     const meaningName = 'meaning';
 
     return (
-      <div>
+      <div className="ModifyWord">
         <div className="addWordForm">
           <h2>단어수정</h2>
           <label htmlFor="voca"></label>

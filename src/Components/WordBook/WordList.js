@@ -1,5 +1,6 @@
 import React from 'react';
 import Word from './Word';
+import './WordList.css';
 
 class WordList extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class WordList extends React.Component {
   render() {
     const { wordList, onRemoveWord, onReviseWord } = this.props;
     return (
-      <div>
+      <div classNam="WordList">
         {wordList.map((word, index) => (
           <Word key={index} word={word} onRemoveWord={onRemoveWord} onReviseWord={onReviseWord} />
         ))}

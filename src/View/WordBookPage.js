@@ -1,9 +1,10 @@
 import React from 'react';
 import Navigation from '../Components/Navigation/Navigation';
 import AddWord from '../Components/AddWord';
-import WordList from '../Components/Body/WordList';
+import WordList from '../Components/WordBook/WordList';
+import './WordBookPage.css';
 
-class WordBook extends React.Component {
+class WordBookPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +28,16 @@ class WordBook extends React.Component {
   render() {
     return (
       <div>
-        <Navigation />
-        <AddWord onChangeWords={this.onChangeWords} />
-        <WordList onReviseWord={this.onReviseWord} wordList={this.state.words} onRemoveWord={this.onRemoveWord} />
+        <header>
+          <h1>단어장</h1>
+        </header>
+        <nav>
+          <Navigation />
+        </nav>
+        <div className="wordBook-container">
+          <AddWord onChangeWords={this.onChangeWords} />
+          <WordList onReviseWord={this.onReviseWord} wordList={this.state.words} onRemoveWord={this.onRemoveWord} />
+        </div>
       </div>
     );
   }
@@ -60,4 +68,4 @@ class WordBook extends React.Component {
   };
 }
 
-export default WordBook;
+export default WordBookPage;

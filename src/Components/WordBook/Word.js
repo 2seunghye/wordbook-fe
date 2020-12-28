@@ -22,7 +22,7 @@ class Word extends React.Component {
     const { isBeenModifying } = this.state;
 
     return (
-      <div>
+      <div className="Word">
         {isBeenModifying ? (
           <ModifyWord onToggleIsBeenModifying={this.onToggleIsBeenModifying} word={word} onReviseWord={onReviseWord} />
         ) : (
