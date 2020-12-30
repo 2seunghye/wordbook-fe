@@ -3,9 +3,9 @@ import Word from './Word';
 import './WordList.css';
 
 class WordList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   onUpdate = () => {
     const newArr = this.props.wordList;

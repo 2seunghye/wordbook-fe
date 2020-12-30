@@ -1,34 +1,21 @@
 import React from 'react';
 import './App.css';
 import WordBookPage from './View/WordBookPage';
+import Test from './routes/Test';
+import Gnb from './Components/Navigation/Gnb';
+
+import { HashRouter, Route } from 'react-router-dom';
+
 // import InputSample from './Components/Navigation/test';
 
-class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  render() {
-    return (
-      <div className="App">
-        <WordBookPage />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <HashRouter>
+      <Gnb />
+      <Route path="/" exact={true} component={WordBookPage} />
+      <Route path="/test" component={Test} />
+    </HashRouter>
+  );
 }
-
-// class App extends React.Component {
-//   // constructor(props) {
-//   //   super(props);
-//   // }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <InputSample />
-//       </div>
-//     );
-//   }
-// }
 
 export default App;
