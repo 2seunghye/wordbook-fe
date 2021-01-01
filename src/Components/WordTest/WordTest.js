@@ -74,7 +74,7 @@ class WordTest extends React.Component {
   }
 
   nextWord = () => {
-    if (this.state.testIndex == this.state.testWords.length - 1) {
+    if (this.state.testIndex === this.state.testWords.length - 1) {
       console.log('test 완료');
       return;
     }
@@ -89,6 +89,7 @@ class WordTest extends React.Component {
 
     return (
       <div>
+        <h1>단어 테스트</h1>
         <h2>{testVoca}</h2>
         <TestAns testMeaning={testMeaning} nextWord={this.nextWord} />
       </div>
