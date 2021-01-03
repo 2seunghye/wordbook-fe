@@ -5,23 +5,39 @@ class TestAns extends React.Component {
     super(props);
     this.state = {
       meaningInput: '',
+      enteredWrongAnswer: false,
     };
   }
-  inputChange = (e) => {
+
+  handleChange = (e) => {
     this.setState({
       meaningInput: e.target.value,
     });
   };
 
-  submitInput = () => {
-    if (this.state.meaningInput === this.props.testMeaning) {
-      this.props.nextWord();
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') this.handleSubmit();
+  };
+
+  handleSubmit = () => {
+    if (this.state.meaningInput === this.props.testWord.meaning) {
+      this.setState({ meaningInput: '', enteredWrongAnswer: false });
+      this.props.handleCorrectAnswer(this.props.testWord.id);
+      this.props.handleNextWord();
+    } else {
+      this.setState({ enteredWrongAnswer: true });
     }
-    this.setState({ meaningInput: '' });
+  };
+
+  handlePass = () => {
+    this.setState({
+      enteredWrongAnswer: false,
+    });
+    this.props.handleNextWord();
   };
 
   render() {
-    const testMeaning = this.props.testMeaning;
+    const testMeaning = this.props;
     return (
       <div>
         <input
@@ -29,13 +45,17 @@ class TestAns extends React.Component {
           id="meaningInput"
           name="meaningInput"
           placeholder="뜻"
-          onChange={this.inputChange}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
           value={this.state.meaningInput}
         />
-        <p>{this.state.meaningInput === testMeaning ? '정답' : '오답'}</p>
-        <button type="button" onClick={this.submitInput}>
-          버튼
+        <button type="button" onClick={this.handleSubmit}>
+          제출
         </button>
+        <button type="button" onClick={this.handlePass}>
+          넘어가기
+        </button>
+        <div>{this.state.enteredWrongAnswer ? '틀렸습니다. 다시 입력하세요' : ''}</div>
       </div>
     );
   }

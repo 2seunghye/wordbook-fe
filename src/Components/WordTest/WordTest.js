@@ -1,11 +1,14 @@
 import React from 'react';
-import TestAns from './TestAns';
+import TestResult from './TestResult';
+import OnTest from './OnTest';
 
 class WordTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      score: 0,
       testIndex: 0,
+      isFinish: false,
       testWords: [
         {
           id: 0,
@@ -23,17 +26,20 @@ class WordTest extends React.Component {
           id: 2,
           voca: 'pineapple',
           meaning: '파인애플',
+          isSuccess: false,
         },
-        // {
-        //   id: 3,
-        //   voca: 'mango',
-        //   meaning: '망고',
-        // },
-        // {
-        //   id: 4,
-        //   voca: 'pear',
-        //   meaning: '배',
-        // },
+        {
+          id: 3,
+          voca: 'mango',
+          meaning: '망고',
+          isSuccess: false,
+        },
+        {
+          id: 4,
+          voca: 'pear',
+          meaning: '배',
+          isSuccess: false,
+        },
         // {
         //   id: 5,
         //   voca: 'peach',
@@ -73,25 +79,64 @@ class WordTest extends React.Component {
     };
   }
 
-  nextWord = () => {
-    if (this.state.testIndex === this.state.testWords.length - 1) {
-      console.log('test 완료');
-      return;
+  shuffleArray(array) {
+    for (let i = 0; i < array.length; i++) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
+  }
 
-    this.setState((prevState) => ({ testIndex: prevState.testIndex + 1 }));
+  handleNextWord = () => {
+    this.setState({
+      testIndex: this.state.testIndex + 1,
+    });
+    if (this.state.testIndex === this.state.testWords.length - 1) {
+      this.setState({
+        isFinish: true,
+      });
+    }
+  };
+
+  handleCorrectAnswer = (id) => {
+    const { testWords } = this.state;
+    const index = testWords.findIndex((word) => {
+      if (word.id === id) return true;
+    });
+    let newTestWords = testWords.slice();
+    newTestWords[index].isSuccess = true;
+    this.setState({
+      testWords: newTestWords,
+      score: this.state.score + 1,
+    });
   };
 
   render() {
-    const testWords = this.state.testWords;
-    const testVoca = testWords[this.state.testIndex].voca;
-    const testMeaning = testWords[this.state.testIndex].meaning;
+    // this.setState({
+    //   testWords: this.shuffleArray(this.props.testWords),
+    // });
+
+    const testWords = this.shuffleArray(this.state.testWords);
+    const { score, testIndex, isFinish } = this.state;
+    console.log(this.state.testWords);
 
     return (
       <div>
         <h1>단어 테스트</h1>
-        <h2>{testVoca}</h2>
-        <TestAns testMeaning={testMeaning} nextWord={this.nextWord} />
+
+        <div>
+          {testIndex}/{testWords.length}
+        </div>
+        {isFinish ? (
+          <TestResult score={score} />
+        ) : (
+          <OnTest
+            handleCorrectAnswer={this.handleCorrectAnswer}
+            handleNextWord={this.handleNextWord}
+            testWord={testWords[testIndex]}
+            testIndex={testIndex}
+          />
+        )}
       </div>
     );
   }
