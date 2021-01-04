@@ -31,13 +31,14 @@ class TestAns extends React.Component {
 
   handlePass = () => {
     this.setState({
+      // meaningInput 초기화 추가
+      meaningInput: '',
       enteredWrongAnswer: false,
     });
     this.props.handleNextWord();
   };
 
   render() {
-    const testMeaning = this.props;
     return (
       <div>
         <input

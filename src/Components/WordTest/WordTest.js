@@ -40,11 +40,11 @@ class WordTest extends React.Component {
           meaning: '배',
           isSuccess: false,
         },
-        // {
-        //   id: 5,
-        //   voca: 'peach',
-        //   meaning: '복숭아',
-        // },
+        {
+          id: 5,
+          voca: 'peach',
+          meaning: '복숭아',
+        },
         // {
         //   id: 6,
         //   voca: 'avocado',
@@ -99,25 +99,26 @@ class WordTest extends React.Component {
   };
 
   handleCorrectAnswer = (id) => {
-    const { testWords } = this.state;
-    const index = testWords.findIndex((word) => {
-      if (word.id === id) return true;
-    });
+    const { testWords, testIndex } = this.state;
+
     let newTestWords = testWords.slice();
-    newTestWords[index].isSuccess = true;
+    // 위에서 설정해둔 testIndex로 테스트해 본 결과 이상 없음! testIndex로 수정했습니다
+    testWords[testIndex].isSuccess = true;
     this.setState({
       testWords: newTestWords,
       score: this.state.score + 1,
     });
   };
 
-  render() {
-    // this.setState({
-    //   testWords: this.shuffleArray(this.props.testWords),
-    // });
+  // 답 입력할 때마다 배열이 계속 셔플되던 현상 수정
+  componentDidMount() {
+    this.setState({
+      testWords: this.shuffleArray(this.state.testWords),
+    });
+  }
 
-    const testWords = this.shuffleArray(this.state.testWords);
-    const { score, testIndex, isFinish } = this.state;
+  render() {
+    const { testWords, score, testIndex, isFinish } = this.state;
     console.log(this.state.testWords);
 
     return (
@@ -125,7 +126,7 @@ class WordTest extends React.Component {
         <h1>단어 테스트</h1>
 
         <div>
-          {testIndex}/{testWords.length}
+          {testIndex} / {testWords.length}
         </div>
         {isFinish ? (
           <TestResult score={score} />
