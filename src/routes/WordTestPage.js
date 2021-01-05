@@ -1,11 +1,11 @@
 import React from 'react';
-import WordTest from '../Components/WordTest/WordTest';
+import TestMainPage from '../Components/WordTest/testHome/TestMainPage';
 
 class WordTestPage extends React.Component {
   render() {
     return (
       <div>
-        <WordTest />
+        <TestMainPage />
       </div>
     );
   }

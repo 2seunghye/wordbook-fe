@@ -1,5 +1,5 @@
 import React from 'react';
-import TestAns from './TestAns';
+import TestAns from '../spellingTest/TestAns';
 
 class OnTest extends React.Component {
   render() {
