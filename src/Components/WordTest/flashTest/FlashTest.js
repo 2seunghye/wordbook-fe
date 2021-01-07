@@ -1,9 +1,8 @@
-import React from 'react';
-import TestResult from './TestResult';
+import { Component } from 'react';
 import OnTest from './OnTest';
-import axios from 'axios';
+import TestResult from './TestResult';
 
-class SpellingTest extends React.Component {
+class FlashTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,64 +99,6 @@ class SpellingTest extends React.Component {
     return array;
   }
 
-  handleWrongAns = () => {
-    const { testWords } = this.state;
-    const newArr = testWords.filter((word) => word.isSuccess === false);
-    this.setState({
-      wrongWords: newArr,
-    });
-  };
-
-  handleNextWord = () => {
-    this.setState({
-      testIndex: this.state.testIndex + 1,
-    });
-    if (this.state.testIndex === this.state.testWords.length - 1) {
-      this.handleWrongAns();
-      this.setState({
-        isFinish: true,
-      });
-    }
-  };
-
-  handleCorrectAnswer = (id) => {
-    const { testWords, testIndex } = this.state;
-
-    let newTestWords = testWords.slice();
-    // 위에서 설정해둔 testIndex로 테스트해 본 결과 이상 없음! testIndex로 수정했습니다
-    testWords[testIndex].isSuccess = true;
-    this.setState({
-      testWords: newTestWords,
-      score: this.state.score + 1,
-    });
-  };
-
-  // 답 입력할 때마다 배열이 계속 셔플되던 현상 수정
-  componentDidMount() {
-    this.setState({
-      testWords: this.shuffleArray(this.state.testWords),
-    });
-    this.handletimer();
-    // testWords.json 받아오기
-    // this._getList();
-  }
-
-  // _getList = () => {
-  //   const apiUrl = '/Users/seunghye/Desktop/my-app 2/src/Components/WordTest/testWords.json';
-
-  //   axios
-  //     .get(apiUrl)
-  //     .then((data) => {
-  //       this.setState({
-  //         testWords: data.data.testWords,
-  //       });
-  //       console.log(this.state.testWords);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   handletimer = () => {
     setInterval(() => {
       const newRunningTime = this.state.runningTime;
@@ -174,33 +115,59 @@ class SpellingTest extends React.Component {
     return t;
   };
 
+  componentDidMount() {
+    this.setState({
+      testWords: this.shuffleArray(this.state.testWords),
+    });
+    this.handletimer();
+  }
+  handleNextWord = () => {
+    this.setState({
+      testIndex: this.state.testIndex + 1,
+    });
+    if (this.state.testIndex === this.state.testWords.length - 1) {
+      this.makeWrongAnsList();
+      this.setState({
+        isFinish: true,
+      });
+    }
+  };
+  makeWrongAnsList = () => {
+    const { testWords } = this.state;
+    const newArr = testWords.filter((word) => word.isSuccess === false); // slice() 필요한가요?
+    this.setState({
+      wrongWords: newArr,
+    });
+  };
+  handleOAns = () => {
+    const { testWords, testIndex } = this.state;
+    let newTestWords = testWords.slice();
+    testWords[testIndex].isSuccess = true;
+    this.setState({
+      testWords: newTestWords,
+      score: this.state.score + 1,
+    });
+  };
+
   render() {
     const { testWords, score, testIndex, isFinish, wrongWords } = this.state;
     const minute = this.timerFormatter(this.state.runningTime.minute);
     const second = this.timerFormatter(this.state.runningTime.second);
-
-    console.log(this.state.testWords);
-
     return (
       <div>
         <h1>단어 테스트</h1>
         <div className="timer">{isFinish ? '' : minute + ':' + second}</div>
         <div>
-          {testIndex} / {testWords.length}
+          {testIndex}/{testWords.length}
         </div>
         {isFinish ? (
           <TestResult score={score} wrongWords={wrongWords} minute={minute} second={second} />
         ) : (
-          <OnTest
-            handleCorrectAnswer={this.handleCorrectAnswer}
-            handleNextWord={this.handleNextWord}
-            testWord={testWords[testIndex]}
-            testIndex={testIndex}
-          />
+          <OnTest handleOAns={this.handleOAns} handleNextWord={this.handleNextWord} testWord={testWords[testIndex]} testIndex={testIndex} />
         )}
       </div>
     );
   }
 }
 
-export default SpellingTest;
+export default FlashTest;

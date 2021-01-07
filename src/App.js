@@ -6,6 +6,8 @@ import Gnb from './Components/Navigation/Gnb';
 
 import SpellingTest from './Components/WordTest/spellingTest/SpellingTest';
 import ChoiceTest from './Components/WordTest/choiceTest/ChoiceTest';
+import FlashTest from './Components/WordTest/flashTest/FlashTest';
+import BlinkerStudy from './Components/WordTest/blinkerStudy/BlinkerStudy';
 
 import { HashRouter, Route } from 'react-router-dom';
 
@@ -13,12 +15,12 @@ function App() {
   return (
     <HashRouter>
       <Gnb />
-      <HashRouter>
-        <Route path="/" exact={true} component={WordBookPage} />
-        <Route path="/test" exact={true} component={WordTestPage} />
-        <Route path="/test/spellingTest" component={SpellingTest} />
-        <Route path="/test/choiceTest" component={ChoiceTest} />
-      </HashRouter>
+      <Route path="/" exact={true} component={WordBookPage} />
+      <Route path="/test" exact={true} component={WordTestPage} />
+      <Route path="/test/spellingTest" component={SpellingTest} />
+      <Route path="/test/choiceTest" component={ChoiceTest} />
+      <Route path="/test/flashTest" component={FlashTest} />
+      <Route path="/test/blinkerStudy" component={BlinkerStudy} />
     </HashRouter>
   );
 }
