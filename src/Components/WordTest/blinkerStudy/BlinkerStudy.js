@@ -3,11 +3,11 @@ import React from 'react';
 class BlinkerStudy extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      speed: 2000,
       testIndex: 0,
       isFinish: false,
-      speed: [3000, 2000, 1000],
-      speedIndex: 0,
       testWords: [
         {
           id: 0,
@@ -84,27 +84,49 @@ class BlinkerStudy extends React.Component {
       ],
     };
   }
+
   componentDidMount() {
     this.setState({
       testWords: this.shuffleArray(this.state.testWords),
     });
-    this.handleTimer();
+    this.timer = setInterval(this.changeWord, this.state.speed);
   }
-  handleTimer = () => {
-    const { isFinish, testIndex, speed, speedIndex, testWords } = this.state;
-    setInterval(() => {
-      if (!isFinish) {
-        this.setState({
-          testIndex: testIndex + 1,
-        });
-      }
-      console.log(isFinish);
-    }, speed[speedIndex]);
-    if (testIndex === testWords.length - 1) {
+
+  componentDidUpdate() {
+    clearInterval(this.timer);
+    this.timer = setInterval(this.changeWord, this.state.speed);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  changeWord = () => {
+    if (this.state.testIndex !== this.state.testWords.length - 1) {
       this.setState({
-        isFinish: true,
+        testIndex: this.state.testIndex + 1,
       });
+    } else {
+      clearInterval(this.timer);
     }
+  };
+
+  handleFaster = () => {
+    this.changeSpeed(-500);
+  };
+
+  handleSlower = () => {
+    this.changeSpeed(500);
+  };
+
+  changeSpeed = (value) => {
+    const min = 500;
+    const max = 5000;
+
+    const newSpeed = this.state.speed + value;
+    if (newSpeed < min || newSpeed > max) return;
+
+    this.setState({ speed: newSpeed });
   };
 
   shuffleArray(array) {
@@ -115,29 +137,17 @@ class BlinkerStudy extends React.Component {
     return array;
   }
 
-  handleFaster = () => {
-    const { speedIndex } = this.state;
-    if (speedIndex < 2) {
-      this.setState({
-        speedIndex: speedIndex + 1,
-      });
-    }
-  };
-  handleSlower = () => {
-    const { speedIndex } = this.state;
-    if (speedIndex > 0) {
-      this.setState({
-        speedIndex: speedIndex - 1,
-      });
-    }
-  };
-
   render() {
-    console.log(this.state);
-    const { testWords, testIndex } = this.state;
+    const { testWords, testIndex, speed } = this.state;
     return (
       <div>
+        <div>
+          {speed / 1000}초
+          <br />
+          {testIndex + 1} / {testWords.length}
+        </div>
         <div>{testWords[testIndex].voca}</div>
+        <div>{testWords[testIndex].meaning}</div>
         <button onClick={this.handleFaster}>faster</button>
         <button onClick={this.handleSlower}>slower</button>
       </div>
