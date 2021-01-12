@@ -7,6 +7,7 @@ class TestResult extends Component {
       isOpen: false,
     };
   }
+
   refreshPage = () => {
     window.location.reload(false);
   };
