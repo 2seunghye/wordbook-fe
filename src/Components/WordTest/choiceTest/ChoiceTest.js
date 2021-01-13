@@ -1,5 +1,6 @@
 import React from 'react';
 import OnTest from '../choiceTest/OnTest';
+import TestResult from '../choiceTest/TestResult';
 
 class ChoiceTest extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class ChoiceTest extends React.Component {
       score: 0,
       testIndex: 0,
       isFinish: false,
-      worngWords: [],
+      wrongWords: [],
       randomIndexArray: [],
       testWords: [
         {
@@ -40,36 +41,36 @@ class ChoiceTest extends React.Component {
           meaning: '망고',
           isSuccess: false,
         },
-        {
-          id: 4,
-          voca: 'pear',
-          meaning: '배',
-          isSuccess: false,
-        },
-        {
-          id: 5,
-          voca: 'peach',
-          meaning: '복숭아',
-          isSuccess: false,
-        },
-        {
-          id: 6,
-          voca: 'avocado',
-          meaning: '아보카도',
-          isSuccess: false,
-        },
-        {
-          id: 7,
-          voca: 'watermelon',
-          meaning: '수박',
-          isSuccess: false,
-        },
-        {
-          id: 8,
-          voca: 'lemon',
-          meaning: '레몬',
-          isSuccess: false,
-        },
+        // {
+        //   id: 4,
+        //   voca: 'pear',
+        //   meaning: '배',
+        //   isSuccess: false,
+        // },
+        // {
+        //   id: 5,
+        //   voca: 'peach',
+        //   meaning: '복숭아',
+        //   isSuccess: false,
+        // },
+        // {
+        //   id: 6,
+        //   voca: 'avocado',
+        //   meaning: '아보카도',
+        //   isSuccess: false,
+        // },
+        // {
+        //   id: 7,
+        //   voca: 'watermelon',
+        //   meaning: '수박',
+        //   isSuccess: false,
+        // },
+        // {
+        //   id: 8,
+        //   voca: 'lemon',
+        //   meaning: '레몬',
+        //   isSuccess: false,
+        // },
         // {
         //   id: 9,
         //   voca: 'melon',
@@ -104,10 +105,11 @@ class ChoiceTest extends React.Component {
     this.setState({
       testWords: this.shuffleArray(this.state.testWords),
     });
-    this.hanldeTimer();
+    this.handleTimer();
+    this.handleRandomIndexArray();
   }
 
-  hanldeTimer = () => {
+  handleTimer = () => {
     setInterval(() => {
       const newRunningTime = this.state.runningTime;
       if (!this.state.isFinish) {
@@ -125,33 +127,37 @@ class ChoiceTest extends React.Component {
     return t;
   };
 
-  handleNextWord = (e) => {
-    console.log(e.target.innerText);
+  handleClickAns = (e) => {
     if (e.target.innerText === this.state.testWords[this.state.testIndex].meaning) {
       document.getElementById('details').innerHTML = '맞았습니다.';
     } else {
       document.getElementById('details').innerHTML = '틀렸습니다.';
+      let newWrongWords = this.state.worngWords.slice();
+      newWrongWords.push(this.state.testWords);
+      this.setState({ wrongWords: newWrongWords });
     }
 
-    const nextWord = () => {
-      this.setState({
-        testIndex: this.state.testIndex + 1,
-      });
-      this.handleRandomIndexArray();
-
-      if (this.state.testIndex === this.state.testWords.length - 1) {
-        this.handleWrongAns();
-        this.setState({
-          isFinish: true,
-        });
-      }
-
-      document.getElementById('details').innerHTML = '';
-    };
+    console.log(this.state.wrongWords);
 
     setTimeout(() => {
-      nextWord();
+      this.handleNextWord();
     }, 1500);
+  };
+
+  handleNextWord = () => {
+    this.setState({
+      testIndex: this.state.testIndex + 1,
+    });
+    this.handleRandomIndexArray();
+
+    if (this.state.testIndex === this.state.testWords.length - 1) {
+      // this.handleWrongAns();
+      this.setState({
+        isFinish: true,
+      });
+    }
+
+    // document.getElementById('details').innerHTML = '';
   };
 
   handleRandomIndexArray = () => {
@@ -179,11 +185,6 @@ class ChoiceTest extends React.Component {
     this.setState({ isLoading: false });
   };
 
-  componentDidMount() {
-    this.handleRandomIndexArray();
-    this.hanldeTimer();
-  }
-
   render() {
     const { runningTime, score, testIndex, isFinish, wrongWords, testWords, randomIndexArray, isLoading } = this.state;
     const minute = this.timeFormatter(runningTime.minute);
@@ -195,18 +196,24 @@ class ChoiceTest extends React.Component {
         ) : (
           <div>
             <h1>단어 테스트</h1>
-            <div id="details"></div>
-            <div>
-              <div>{testWords[testIndex].voca}</div>
-            </div>
-            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[0]].meaning}</div>
-            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[1]].meaning}</div>
-            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[2]].meaning}</div>
-            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[3]].meaning}</div>
             <div className="timer">{isFinish ? '' : minute + ':' + second}</div>
 
-            <button onClick={this.handleNextWord}>버튼</button>
-            <div>{testIndex / testWords.length}</div>
+            {isFinish ? (
+              <TestResult score={score} minute={minute} second={second} wrongWords={wrongWords} />
+            ) : (
+              <div>
+                <div id="details"></div>
+                <div>
+                  <div>{testWords[testIndex].voca}</div>
+                </div>
+                <div onClick={this.handleClickAns}>{testWords[randomIndexArray[0]].meaning}</div>
+                <div onClick={this.handleClickAns}>{testWords[randomIndexArray[1]].meaning}</div>
+                <div onClick={this.handleClickAns}>{testWords[randomIndexArray[2]].meaning}</div>
+                <div onClick={this.handleClickAns}>{testWords[randomIndexArray[3]].meaning}</div>
+                <button onClick={this.handleNextWord}>버튼</button>
+                <div>{testIndex / testWords.length}</div>
+              </div>
+            )}
           </div>
         )}
       </div>
