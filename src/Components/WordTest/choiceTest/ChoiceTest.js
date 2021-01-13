@@ -1,4 +1,5 @@
 import React from 'react';
+import OnTest from '../choiceTest/OnTest';
 
 class ChoiceTest extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class ChoiceTest extends React.Component {
         minute: 0,
         second: 0,
       },
-
+      isLoading: true,
       score: 0,
       testIndex: 0,
       isFinish: false,
@@ -124,57 +125,90 @@ class ChoiceTest extends React.Component {
     return t;
   };
 
-  handleNextWord = () => {
-    this.setState({
-      testIndex: this.state.testIndex + 1,
-    });
-    if (this.state.testIndex === this.state.testWords.length - 1) {
-      this.handleWrongAns();
-      this.setState({
-        isFinish: true,
-      });
+  handleNextWord = (e) => {
+    console.log(e.target.innerText);
+    if (e.target.innerText === this.state.testWords[this.state.testIndex].meaning) {
+      document.getElementById('details').innerHTML = '맞았습니다.';
+    } else {
+      document.getElementById('details').innerHTML = '틀렸습니다.';
     }
+
+    const nextWord = () => {
+      this.setState({
+        testIndex: this.state.testIndex + 1,
+      });
+      this.handleRandomIndexArray();
+
+      if (this.state.testIndex === this.state.testWords.length - 1) {
+        this.handleWrongAns();
+        this.setState({
+          isFinish: true,
+        });
+      }
+
+      document.getElementById('details').innerHTML = '';
+    };
+
+    setTimeout(() => {
+      nextWord();
+    }, 1500);
   };
 
   handleRandomIndexArray = () => {
-    const indexArray = this.state.randomIndexArray;
+    const indexArray = [];
+    // 1. 정답인 testIndex는 반드시 포함이 되어야 하므로 array에 push해준다.
     indexArray.push(this.state.testIndex);
-    for (let i = 0; indexArray.length === 4; i++) {
+
+    // 2. 사지선다이므로 array 길이가 4가 될 때 까지 반복
+    while (indexArray.length < 4) {
       const randomIndex = Math.floor(Math.random() * this.state.testWords.length);
+      // 2-1. 중복된 숫자는 넣으면 안되므로 indexOf가 -1일때만 push
       if (indexArray.indexOf(randomIndex) == -1) {
         indexArray.push(randomIndex);
       }
-      this.setState({
-        randomIndexArray: indexArray,
-      });
-      console.log(this.state.randomIndexArray);
     }
+
+    // 3. 배열을 섞지 않으면 정답이 무조건 1번에 오기 때문에 한 번 섞어준다
+    for (let i = indexArray.length - 1; i >= 0; --i) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [indexArray[i], indexArray[j]] = [indexArray[j], indexArray[i]];
+    }
+
+    // 4. randomIndexArray에 넣어준다
+    this.setState({ randomIndexArray: indexArray });
+    this.setState({ isLoading: false });
   };
 
   componentDidMount() {
     this.handleRandomIndexArray();
+    this.hanldeTimer();
   }
 
   render() {
-    // this.handleRandomIndexArray();
-    const { runningTime, score, testIndex, isFinish, wrongWords, testWords, randomIndexArray } = this.state;
+    const { runningTime, score, testIndex, isFinish, wrongWords, testWords, randomIndexArray, isLoading } = this.state;
     const minute = this.timeFormatter(runningTime.minute);
     const second = this.timeFormatter(runningTime.second);
     return (
       <div>
-        <h1>단어 테스트</h1>
-        <div className="timer">{isFinish ? '' : minute + ':' + second}</div>
-        <div>
-          <div>{testWords[testIndex].voca}</div>
-        </div>
-        <div>
-          <div>1. {testWords[0].meaning}</div>
-          {/* 랜덤인덱스 만들어서 넣으면 됨 */}
-          <div>2. {testWords[1].meaning}</div>
-          <div>3. {testWords[2].meaning}</div>
-          <div>4. {testWords[3].meaning}</div>
-        </div>
-        <div>{testIndex / testWords.length}</div>
+        {isLoading ? (
+          <div>로딩중입니다...</div>
+        ) : (
+          <div>
+            <h1>단어 테스트</h1>
+            <div id="details"></div>
+            <div>
+              <div>{testWords[testIndex].voca}</div>
+            </div>
+            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[0]].meaning}</div>
+            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[1]].meaning}</div>
+            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[2]].meaning}</div>
+            <div onClick={this.handleNextWord}>{testWords[randomIndexArray[3]].meaning}</div>
+            <div className="timer">{isFinish ? '' : minute + ':' + second}</div>
+
+            <button onClick={this.handleNextWord}>버튼</button>
+            <div>{testIndex / testWords.length}</div>
+          </div>
+        )}
       </div>
     );
   }
