@@ -1,59 +1,12 @@
 {
-  "wordBookList": {
-    "userWordBookList": [
-      {
-        "wordBookId": "단어장1"
-      },
-      {
-        "wordBookId": "단어장2"
-      },
-      {
-        "wordBookId": "단어장3"
-      }
-    ],
-    "groupList": [
-      {
-        "groupName": "Group1",
-        "groupWordBookList": [
-          {
-            "wordBookId": "그룹단어장1"
-          },
-          {
-            "wordBookId": "그룹단어장2"
-          },
-          {
-            "wordBookId": "그룹단어장3"
-          }
-        ]
-      },
-      {
-        "groupName": "Group2",
-        "groupWordBookList": [
-          {
-            "wordBookId": "그룹단어장1"
-          },
-          {
-            "wordBookId": "그룹단어장2"
-          },
-          {
-            "wordBookId": "그룹단어장3"
-          }
-        ]
-      },
-      {
-        "groupName": "Group3",
-        "groupWordBookList": [
-          {
-            "wordBookId": "그룹단어장1"
-          },
-          {
-            "wordBookId": "그룹단어장2"
-          },
-          {
-            "wordBookId": "그룹단어장3"
-          }
-        ]
-      }
-    ]
+  "id": 4,
+  "name": "testStudyGroup",
+  "userDTOList": [{ "id": 1, "name": "testName123" }],
+  "_links": {
+    "self": { "href": "http://180.189.90.200:8080/api/v1/users/1/study-groups/4" },
+    "update_studyGroup": { "href": "http://180.189.90.200:8080/api/v1/users/1/study-groups/4" },
+    "delete_studyGroup": { "href": "http://180.189.90.200:8080/api/v1/users/1/study-groups/4" },
+    "create_studyGroupWordBook": { "href": "http://180.189.90.200:8080/api/v1/users/1/study-groups/4/wordbooks" },
+    "get_user": { "href": "http://180.189.90.200:8080/api/v1/users/1" }
   }
 }

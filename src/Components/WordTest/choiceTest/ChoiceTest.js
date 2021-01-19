@@ -127,13 +127,14 @@ class ChoiceTest extends React.Component {
     return t;
   };
 
-  handleClickAns = (e) => {
+  handleClickAns = async (e) => {
     if (e.target.innerText === this.state.testWords[this.state.testIndex].meaning) {
       document.getElementById('details').innerHTML = '맞았습니다.';
     } else {
       document.getElementById('details').innerHTML = '틀렸습니다.';
-      let newWrongWords = this.state.worngWords.slice();
-      newWrongWords.push(this.state.testWords);
+      const newWrongWords = this.state.wrongWords.slice();
+      await newWrongWords.push(this.state.testWords[this.state.testIndex]);
+      console.log(newWrongWords);
       this.setState({ wrongWords: newWrongWords });
     }
 

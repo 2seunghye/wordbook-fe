@@ -7,13 +7,17 @@ class TestResult extends Component {
       isOpen: false,
     };
   }
-  refresh = () => {
+  refreshPage = () => {
     window.location.reload(false);
   };
   handleToggle = () => {
     this.setState({
       isOpen: !this.state.isOpen,
     });
+  };
+
+  handleShowButton = () => {
+    this.handleToggle();
   };
 
   render() {
