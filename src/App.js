@@ -11,7 +11,7 @@ import BlinkerStudy from './Components/WordTest/blinkerStudy/BlinkerStudy';
 
 import { HashRouter, Route } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <HashRouter>
       <Gnb />
@@ -23,6 +23,6 @@ function App() {
       <Route path="/test/blinkerStudy" component={BlinkerStudy} />
     </HashRouter>
   );
-}
+};
 
 export default App;
