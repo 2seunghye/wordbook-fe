@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Navigation.css';
 
-function Gnb() {
+const Gnb = () => {
   let data = {
     name: 'testStudyGroup',
   };
@@ -31,6 +31,6 @@ function Gnb() {
       <Link to="/test">TEST</Link>
     </div>
   );
-}
+};
 
 export default Gnb;
