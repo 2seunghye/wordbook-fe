@@ -14,7 +14,7 @@ const useInput = (initialValue, validator) => {
   };
 
   const validate = (value) => {
-    if (typeof validator === 'function') {
+    if (typeof validator !== 'function') {
       throw new Error('please improve your code');
     }
 
