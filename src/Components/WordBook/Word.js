@@ -10,9 +10,7 @@ const Word = (props) => {
     setIsBeenModifying(!isBeenModifying);
   };
 
-  const word = props.word;
-  const onReviseWord = props.onReviseWord;
-  const onRemoveWord = props.onRemoveWord;
+  const { word, onReviseWord, onRemoveWord } = props;
 
   return (
     <div className="Word">
