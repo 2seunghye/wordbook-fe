@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import WordBook from './WordBook';
 import './GroupWordBookList.css';
 
-class GroupWordBookList extends Component {
-  render() {
-    const groupWordBookList = this.props.groupWordBookList;
+const GroupWordBookList = (props) => {
+  const groupWordBookList = props.groupWordBookList;
 
-    return (
-      <div>
-        {groupWordBookList.map((wordBook, index) => (
-          <WordBook key={index} wordBook={wordBook} />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {groupWordBookList.map((wordBook, index) => (
+        <WordBook key={index} wordBook={wordBook} />
+      ))}
+    </div>
+  );
+};
 
 export default GroupWordBookList;
