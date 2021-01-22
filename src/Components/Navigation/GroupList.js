@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Group from './Group.js';
 import './GroupList.css';
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const OnBlinker = (props) => {
   const [testIndex, setTestIndex] = useState(0);
-  const { testWords } = props;
   const [speed, setSpeed] = useState(2000);
   const [isFinish, setIsFinish] = useState(false);
+  const { testWords } = props;
 
   const changeTimer = () => {
     setTimeout(() => {
@@ -19,7 +19,7 @@ const OnBlinker = (props) => {
   useEffect(() => {
     changeTimer();
     return () => clearTimeout(changeTimer);
-  }, [testIndex]);
+  });
 
   const handleFaster = () => {
     changeSpeed(-500);
@@ -38,10 +38,17 @@ const OnBlinker = (props) => {
     setSpeed(newSpeed);
   };
 
+  const result = props.testWords.map((word) => (
+    <div>
+      <span>{word.voca}</span>
+      <span>{word.meaning}</span>
+    </div>
+  ));
+
   return (
     <div>
       {isFinish ? (
-        <div>끝났습니다.</div>
+        <div>{result}</div>
       ) : (
         <div>
           <div>

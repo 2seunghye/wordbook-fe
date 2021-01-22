@@ -6,8 +6,8 @@ import OnChoiceTest from './choiceTest/OnChoiceTest';
 import OnBlinker from './blinkerStudy/OnBlinker';
 
 const TestComponents = (props) => {
-  const [min, setMin] = useState(5);
-  const [sec, setSec] = useState(5);
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState(0);
   const [score, setScore] = useState(0);
   const [testIndex, setTestIndex] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
@@ -87,30 +87,7 @@ const TestComponents = (props) => {
     },
   ]);
 
-  const handleChoiceNextWord = () => {
-    setTestIndex(testIndex + 1);
-
-    if (testIndex === testWords.length - 1) {
-      // this.handleWrongAns();
-      setIsFinish(true);
-    }
-  };
-
-  const handleClickAns = async (e) => {
-    if (e.target.innerText === testWords[testIndex].meaning) {
-      document.getElementById('details').innerHTML = '맞았습니다.';
-    } else {
-      document.getElementById('details').innerHTML = '틀렸습니다.';
-      const newWrongWords = wrongWords.slice();
-      await newWrongWords.push(testWords[testIndex]);
-      setWrongWords(newWrongWords);
-    }
-
-    setTimeout(() => {
-      handleChoiceNextWord();
-    }, 1500);
-  };
-
+  // TestWords 셔플
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i >= 0; --i) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -119,33 +96,11 @@ const TestComponents = (props) => {
     return array;
   };
 
-  const handleWrongAns = () => {
-    const newArr = testWords.filter((word) => word.isSuccess === false);
-    setWrongWords(newArr);
-  };
-
-  const handleNextWord = () => {
-    setTestIndex(testIndex + 1);
-
-    if (testIndex === testWords.length - 1) {
-      handleWrongAns();
-      setIsFinish(true);
-    }
-  };
-
-  const handleCorrectAnswer = (id) => {
-    let newTestWords = testWords.slice();
-    testWords[testIndex].isSuccess = true;
-    setTestWords(newTestWords);
-    setScore(score + 1);
-  };
-
   useEffect(() => {
-    console.log(window.location);
-
     setTestWords(shuffleArray(testWords));
-  }, []);
+  }, [testWords]);
 
+  // TestTimer 기능
   const TestTimer = () => {
     const timerFormatter = (t) => {
       if (t < 10) t = '0' + t;
@@ -175,17 +130,48 @@ const TestComponents = (props) => {
 
     return <div className="timer">{props.isFinish ? '' : minute + ':' + second}</div>;
   };
+  ///////////////////////////////////////////////////////
 
-  const handleOAns = () => {
+  // 객관식 시험에만 해당
+  const handleClickAnswer = async (e) => {
+    if (e.target.innerText === testWords[testIndex].meaning) {
+      document.getElementById('details').innerHTML = '맞았습니다.';
+      testWords[testIndex].isSuccess = true;
+    } else {
+      document.getElementById('details').innerHTML = '틀렸습니다.';
+      handleWrongAns();
+    }
+
+    setTimeout(() => {
+      handleNextWord();
+    }, 1500);
+  };
+
+  // 주관식 시험, 플래쉬 시험 에만 해당
+  const handleCorrectAnswer = (id) => {
     let newTestWords = testWords.slice();
     testWords[testIndex].isSuccess = true;
     setTestWords(newTestWords);
     setScore(score + 1);
   };
 
+  // 모두 사용 가능
+  const handleWrongAns = () => {
+    const newArr = testWords.filter((word) => word.isSuccess === false);
+    setWrongWords(newArr);
+  };
+
+  const handleNextWord = () => {
+    setTestIndex(testIndex + 1);
+    if (testIndex === testWords.length - 1) {
+      handleWrongAns();
+      setIsFinish(true);
+    }
+  };
+
   return (
     <div>
-      <TestTimer isFinish={isFinish} min={min} sec={sec} />
+      <TestTimer />
       <div>
         {testIndex} / {testWords.length}
       </div>
@@ -193,33 +179,24 @@ const TestComponents = (props) => {
       {isFinish && <ResultComponent score={score} wrongWords={wrongWords} min={min} sec={sec} />}
 
       {window.location.hash === '#/test/spellingTest' && !isFinish && (
-        <OnSpellingTest
-          testWord={testWords[testIndex]}
-          testIndex={testIndex}
-          handleCorrectAnswer={handleCorrectAnswer}
-          handleNextWord={handleNextWord}
-        />
+        <OnSpellingTest testWord={testWords[testIndex]} handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} />
       )}
 
       {window.location.hash === '#/test/choiceTest' && !isFinish && (
         <OnChoiceTest
           testWord={testWords[testIndex]}
           testIndex={testIndex}
-          handleCorrectAnswer={handleCorrectAnswer}
           handleNextWord={handleNextWord}
-          handleChoiceNextWord={handleChoiceNextWord}
-          handleClickAns={handleClickAns}
+          handleClickAnswer={handleClickAnswer}
           testWords={testWords}
         />
       )}
 
       {window.location.hash === '#/test/flashTest' && !isFinish && (
-        <OnFlashTest handleOAns={handleOAns} handleNextWord={handleNextWord} testWord={testWords[testIndex]} testIndex={testIndex} />
+        <OnFlashTest handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} testWord={testWords[testIndex]} />
       )}
 
-      {window.location.hash === '#/test/blinkerStudy' && !isFinish && (
-        <OnBlinker testIndex={testIndex} isFinish={isFinish} testWords={testWords} />
-      )}
+      {window.location.hash === '#/test/blinkerStudy' && !isFinish && <OnBlinker testWords={testWords} />}
     </div>
   );
 };

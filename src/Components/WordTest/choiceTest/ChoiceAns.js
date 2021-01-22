@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const ChoiceAns = (props) => {
   const [randomIndexArray, setRandomIndexArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { testWord, testIndex, handleNextWord, handleClickAns, testWords, handleChoiceNextWord } = props;
+  const { testWord, testIndex, handleNextWord, testWords, handleClickAnswer } = props;
 
   const handleRandomIndexArray = () => {
     const indexArray = [];
@@ -11,7 +11,7 @@ const ChoiceAns = (props) => {
 
     while (indexArray.length < 4) {
       const randomIndex = Math.floor(Math.random() * testWords.length);
-      if (indexArray.indexOf(randomIndex) == -1) {
+      if (indexArray.indexOf(randomIndex) === -1) {
         indexArray.push(randomIndex);
       }
     }
@@ -29,8 +29,6 @@ const ChoiceAns = (props) => {
     handleRandomIndexArray();
   }, [testWord]);
 
-  console.log(randomIndexArray);
-
   return (
     <div>
       {isLoading ? (
@@ -38,11 +36,11 @@ const ChoiceAns = (props) => {
       ) : (
         <div>
           <div id="details"></div>
-          <div onClick={handleClickAns}>{testWords[randomIndexArray[0]].meaning}</div>
-          <div onClick={handleClickAns}>{testWords[randomIndexArray[1]].meaning}</div>
-          <div onClick={handleClickAns}>{testWords[randomIndexArray[2]].meaning}</div>
-          <div onClick={handleClickAns}>{testWords[randomIndexArray[3]].meaning}</div>
-          <button onClick={handleChoiceNextWord}>넘어가기</button>
+          <div onClick={handleClickAnswer}>{testWords[randomIndexArray[0]].meaning}</div>
+          <div onClick={handleClickAnswer}>{testWords[randomIndexArray[1]].meaning}</div>
+          <div onClick={handleClickAnswer}>{testWords[randomIndexArray[2]].meaning}</div>
+          <div onClick={handleClickAnswer}>{testWords[randomIndexArray[3]].meaning}</div>
+          <button onClick={handleNextWord}>넘어가기</button>
         </div>
       )}
     </div>

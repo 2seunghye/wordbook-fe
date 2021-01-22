@@ -1,35 +1,22 @@
 import React from 'react';
 import ChoiceAns from './ChoiceAns';
 
-const ChoiceTest = (props) => {
-  const {
-    testWord,
-    testIndex,
-    nextWord,
-    handleCorrectAnswer,
-    handleNextWord,
-    handleRandomIndexArray,
-    handleChoiceNextWord,
-    handleClickAns,
-    testWords,
-  } = props;
+const OnChoiceTest = (props) => {
+  const { testWord, testIndex, handleNextWord, handleRandomIndexArray, handleClickAnswer, testWords } = props;
 
   return (
     <div>
       <div>{testWord.voca}</div>
       <ChoiceAns
-        handleCorrectAnswer={handleCorrectAnswer}
         handleNextWord={handleNextWord}
         testWord={testWord}
         testIndex={testIndex}
-        nextWord={nextWord}
         handleRandomIndexArray={handleRandomIndexArray}
-        handleChoiceNextWord={handleChoiceNextWord}
-        handleClickAns={handleClickAns}
+        handleClickAnswer={handleClickAnswer}
         testWords={testWords}
       />
     </div>
   );
 };
 
-export default ChoiceTest;
+export default OnChoiceTest;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TestMainPage = () => {
+const WordTestNav = () => {
   return (
     <div>
       <Link to="/test/spellingTest">주관식 시험</Link>
@@ -12,4 +12,4 @@ const TestMainPage = () => {
   );
 };
 
-export default TestMainPage;
+export default WordTestNav;

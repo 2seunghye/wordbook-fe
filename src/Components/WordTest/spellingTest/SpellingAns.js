@@ -1,65 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class SpellingAns extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      meaningInput: '',
-      enteredWrongAnswer: false,
-    };
-  }
+const SpellingAns = (props) => {
+  const [meaningInput, setMeaningInput] = useState('');
+  const [enteredWrongAnswer, setEnteredWrongAnswer] = useState(false);
+  const { testWord, handleCorrectAnswer, handleNextWord } = props;
 
-  handleChange = (e) => {
-    this.setState({
-      meaningInput: e.target.value,
-    });
+  const handleChange = (e) => {
+    setMeaningInput(e.target.value);
   };
 
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') this.handleSubmit();
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') handleSubmit();
   };
 
-  handleSubmit = () => {
-    if (this.state.meaningInput === this.props.testWord.meaning) {
-      this.setState({ meaningInput: '', enteredWrongAnswer: false });
-      this.props.handleCorrectAnswer(this.props.testWord.id);
-      this.props.handleNextWord();
+  const handleSubmit = () => {
+    if (meaningInput === testWord.meaning) {
+      setMeaningInput('');
+      handleCorrectAnswer(testWord.id);
+      handleNextWord();
     } else {
-      this.setState({ enteredWrongAnswer: true });
+      setEnteredWrongAnswer(true);
     }
   };
 
-  handlePass = () => {
-    this.setState({
-      // meaningInput 초기화 추가
-      meaningInput: '',
-      enteredWrongAnswer: false,
-    });
-    this.props.handleNextWord();
+  const handlePass = () => {
+    setMeaningInput('');
+    setEnteredWrongAnswer(false);
+    handleNextWord();
   };
 
-  render() {
-    return (
-      <div>
-        <input
-          type="text"
-          id="meaningInput"
-          name="meaningInput"
-          placeholder="뜻"
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          value={this.state.meaningInput}
-        />
-        <button type="button" onClick={this.handleSubmit}>
-          제출
-        </button>
-        <button type="button" onClick={this.handlePass}>
-          넘어가기
-        </button>
-        <div>{this.state.enteredWrongAnswer ? '틀렸습니다. 다시 입력하세요' : ''}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <input
+        type="text"
+        id="meaningInput"
+        name="meaningInput"
+        placeholder="뜻"
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        value={meaningInput}
+      />
+      <button type="button" onClick={handleSubmit}>
+        제출
+      </button>
+      <button type="button" onClick={handlePass}>
+        넘어가기
+      </button>
+      <div>{enteredWrongAnswer ? '틀렸습니다. 다시 입력하세요' : ''}</div>
+    </div>
+  );
+};
 
 export default SpellingAns;

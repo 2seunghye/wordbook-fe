@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GroupWordBookList from './GroupWordBookList';
 import './Group.css';
 

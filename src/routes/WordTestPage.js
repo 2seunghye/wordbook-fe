@@ -1,10 +1,10 @@
 import React from 'react';
-import TestMainPage from '../Components/WordTest/testHome/TestMainPage';
+import WordTestNav from '../Components/WordTest/testHome/WordTestNav';
 
 const WordTestPage = () => {
   return (
     <div>
-      <TestMainPage />
+      <WordTestNav />
     </div>
   );
 };
