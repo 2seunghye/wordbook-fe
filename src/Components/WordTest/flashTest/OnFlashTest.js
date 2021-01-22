@@ -1,6 +1,6 @@
 import React from 'react';
 
-class OnTest extends React.Component {
+class OnFlashTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,4 +53,4 @@ class OnTest extends React.Component {
   }
 }
 
-export default OnTest;
+export default OnFlashTest;

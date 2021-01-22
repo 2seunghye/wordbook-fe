@@ -4,12 +4,8 @@ import WordBookPage from './routes/WordBookPage';
 import WordTestPage from './routes/WordTestPage';
 import Gnb from './Components/Navigation/Gnb';
 
-import SpellingTest from './Components/WordTest/spellingTest/SpellingTest';
-import ChoiceTest from './Components/WordTest/choiceTest/ChoiceTest';
-import FlashTest from './Components/WordTest/flashTest/FlashTest';
-import BlinkerStudy from './Components/WordTest/blinkerStudy/BlinkerStudy';
-
 import { HashRouter, Route } from 'react-router-dom';
+import TestComponents from './Components/WordTest/TestComponents';
 
 const App = () => {
   return (
@@ -17,10 +13,10 @@ const App = () => {
       <Gnb />
       <Route path="/" exact={true} component={WordBookPage} />
       <Route path="/test" exact={true} component={WordTestPage} />
-      <Route path="/test/spellingTest" component={SpellingTest} />
-      <Route path="/test/choiceTest" component={ChoiceTest} />
-      <Route path="/test/flashTest" component={FlashTest} />
-      <Route path="/test/blinkerStudy" component={BlinkerStudy} />
+      <Route path="/test/spellingTest" component={TestComponents} />
+      <Route path="/test/choiceTest" component={TestComponents} />
+      <Route path="/test/flashTest" component={TestComponents} />
+      <Route path="/test/blinkerStudy" component={TestComponents} />
     </HashRouter>
   );
 };
