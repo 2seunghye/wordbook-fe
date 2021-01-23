@@ -9,9 +9,9 @@ const TestComponents = (props) => {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
   const [score, setScore] = useState(0);
-  const [testIndex, setTestIndex] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
+  const [testIndex, setTestIndex] = useState(0);
   const [testWords, setTestWords] = useState([
     {
       id: 0,
@@ -169,6 +169,38 @@ const TestComponents = (props) => {
     }
   };
 
+  const spellingTest = (
+    <OnSpellingTest testWord={testWords[testIndex]} handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} />
+  );
+
+  const choiceTest = (
+    <OnChoiceTest
+      testWord={testWords[testIndex]}
+      testIndex={testIndex}
+      handleNextWord={handleNextWord}
+      handleClickAnswer={handleClickAnswer}
+      testWords={testWords}
+    />
+  );
+
+  const flashTest = (
+    <OnFlashTest handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} testWord={testWords[testIndex]} />
+  );
+
+  const blinkerStudy = <OnBlinker testWords={testWords} />;
+
+  const renderTestDom = () => {
+    if (window.location.hash === '#/test/spellingTest') {
+      return spellingTest;
+    } else if (window.location.hash === '#/test/choiceTest') {
+      return choiceTest;
+    } else if (window.location.hash === '#/test/flashTest') {
+      return flashTest;
+    } else if (window.location.hash === '#/test/blinkerStudy') {
+      return blinkerStudy;
+    }
+  };
+
   return (
     <div>
       <TestTimer />
@@ -178,25 +210,7 @@ const TestComponents = (props) => {
 
       {isFinish && <ResultComponent score={score} wrongWords={wrongWords} min={min} sec={sec} />}
 
-      {window.location.hash === '#/test/spellingTest' && !isFinish && (
-        <OnSpellingTest testWord={testWords[testIndex]} handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} />
-      )}
-
-      {window.location.hash === '#/test/choiceTest' && !isFinish && (
-        <OnChoiceTest
-          testWord={testWords[testIndex]}
-          testIndex={testIndex}
-          handleNextWord={handleNextWord}
-          handleClickAnswer={handleClickAnswer}
-          testWords={testWords}
-        />
-      )}
-
-      {window.location.hash === '#/test/flashTest' && !isFinish && (
-        <OnFlashTest handleCorrectAnswer={handleCorrectAnswer} handleNextWord={handleNextWord} testWord={testWords[testIndex]} />
-      )}
-
-      {window.location.hash === '#/test/blinkerStudy' && !isFinish && <OnBlinker testWords={testWords} />}
+      {!isFinish && renderTestDom()}
     </div>
   );
 };

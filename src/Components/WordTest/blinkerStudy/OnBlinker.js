@@ -16,11 +16,6 @@ const OnBlinker = (props) => {
     }, speed);
   };
 
-  useEffect(() => {
-    changeTimer();
-    return () => clearTimeout(changeTimer);
-  });
-
   const handleFaster = () => {
     changeSpeed(-500);
   };
@@ -38,6 +33,11 @@ const OnBlinker = (props) => {
     setSpeed(newSpeed);
   };
 
+  useEffect(() => {
+    changeTimer();
+    return () => clearTimeout(changeTimer);
+  });
+
   const result = props.testWords.map((word) => (
     <div>
       <span>{word.voca}</span>
@@ -48,7 +48,10 @@ const OnBlinker = (props) => {
   return (
     <div>
       {isFinish ? (
-        <div>{result}</div>
+        <div>
+          <h2>모든 단어 보기</h2>
+          <div>{result}</div>
+        </div>
       ) : (
         <div>
           <div>

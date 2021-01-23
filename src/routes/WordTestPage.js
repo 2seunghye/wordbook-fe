@@ -1,5 +1,5 @@
 import React from 'react';
-import WordTestNav from '../Components/WordTest/testHome/WordTestNav';
+import WordTestNav from '../Components/WordTest/WordTestNavigation/WordTestNav';
 
 const WordTestPage = () => {
   return (
