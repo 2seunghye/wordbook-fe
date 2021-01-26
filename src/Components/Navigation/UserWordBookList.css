@@ -1,0 +1,23 @@
+.userWordBookList {
+  padding: 10px 0;
+}
+
+.userWordBookList h5 {
+  font-weight: 400;
+  color: #cfcfcf;
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}
+
+.userWordBookList div {
+  color: #454545;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+hr {
+  border: 0;
+  margin-top: 20px;
+  height: 1px;
+  background-color: #cfcfcf;
+}

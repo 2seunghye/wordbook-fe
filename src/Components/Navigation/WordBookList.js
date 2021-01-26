@@ -6,55 +6,44 @@ const WordBookList = () => {
   const wordBookList = {
     userWordBookList: [
       {
-        wordBookId: '단어장1',
+        wordBookId: '해커스 토익기초 11',
       },
       {
-        wordBookId: '단어장2',
+        wordBookId: '해커스 토익기초 12',
       },
       {
-        wordBookId: '단어장3',
+        wordBookId: '능률보카 Day29',
       },
     ],
     groupList: [
       {
-        groupName: 'Group1',
+        groupName: '토익 스터디(그룹)',
         groupWordBookList: [
           {
-            wordBookId: '그룹단어장1',
+            wordBookId: '스터디 Day1',
           },
           {
-            wordBookId: '그룹단어장2',
+            wordBookId: '스터디 Day2',
           },
           {
-            wordBookId: '그룹단어장3',
+            wordBookId: '스터디 Day3',
+          },
+          {
+            wordBookId: '스터디 Day4',
           },
         ],
       },
       {
-        groupName: 'Group2',
+        groupName: '학교 스터디',
         groupWordBookList: [
           {
-            wordBookId: '그룹단어장1',
+            wordBookId: '단어시험 1주차',
           },
           {
-            wordBookId: '그룹단어장2',
+            wordBookId: '단어시험 2주차',
           },
           {
-            wordBookId: '그룹단어장3',
-          },
-        ],
-      },
-      {
-        groupName: 'Group3',
-        groupWordBookList: [
-          {
-            wordBookId: '그룹단어장1',
-          },
-          {
-            wordBookId: '그룹단어장2',
-          },
-          {
-            wordBookId: '그룹단어장3',
+            wordBookId: '단어시험 3주차',
           },
         ],
       },

@@ -13,19 +13,23 @@ const WordView = (props) => {
   return (
     <div className="WordView">
       <div className="word-card" onClick={handleClick}>
-        <div className="voca">
-          <span>{voca}</span>
+        <div className="word-container">
+          <div className="voca">
+            <span>{voca}</span>
+          </div>
+          <div className={isOpen ? 'meaning' : 'meaning hidden'}>
+            <span>{meaning}</span>
+          </div>
         </div>
-        <div className={isOpen ? 'meaning' : 'meaning hidden'}>
-          <span>{meaning}</span>
+        <div className="wordView-btn">
+          <button type="button" onClick={onToggleIsBeenModifying}>
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button type="button" onClick={() => onRemoveWord(id)}>
+            <i class="fas fa-trash-alt"></i>
+          </button>
         </div>
       </div>
-      <button type="button" onClick={() => onRemoveWord(id)}>
-        삭제버튼
-      </button>
-      <button type="button" onClick={onToggleIsBeenModifying}>
-        수정버튼
-      </button>
     </div>
   );
 };

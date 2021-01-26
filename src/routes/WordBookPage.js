@@ -7,16 +7,76 @@ import './WordBookPage.css';
 const WordBookPage = () => {
   const [words, setWords] = useState([
     {
-      isOpen: false,
+      isOpen: true,
       id: 0,
       voca: 'apple',
       meaning: '사과',
     },
     {
-      isOpen: false,
+      isOpen: true,
       id: 1,
       voca: 'banana',
       meaning: '바나나',
+    },
+    {
+      id: 2,
+      voca: 'pineapple',
+      meaning: '파인애플',
+      isOpen: true,
+    },
+    {
+      id: 3,
+      voca: 'mango',
+      meaning: '망고',
+      isOpen: true,
+    },
+    {
+      id: 4,
+      voca: 'pear',
+      meaning: '배',
+      isOpen: true,
+    },
+    {
+      id: 5,
+      voca: 'peach',
+      meaning: '복숭아',
+      isOpen: true,
+    },
+    {
+      id: 6,
+      voca: 'avocado',
+      meaning: '아보카도',
+      isOpen: true,
+    },
+    {
+      id: 7,
+      voca: 'watermelon',
+      meaning: '수박',
+      isOpen: true,
+    },
+    {
+      id: 8,
+      voca: 'lemon',
+      meaning: '레몬',
+      isOpen: true,
+    },
+    {
+      id: 9,
+      voca: 'melon',
+      meaning: '멜론',
+      isOpen: true,
+    },
+    {
+      id: 10,
+      voca: 'coconut',
+      meaning: '코코넛',
+      isOpen: true,
+    },
+    {
+      id: 11,
+      voca: 'strawberry',
+      meaning: '딸기',
+      isOpen: true,
     },
   ]);
 
@@ -38,14 +98,14 @@ const WordBookPage = () => {
   };
 
   return (
-    <div>
+    <div className="wordBookPage">
       <header>
-        <h1>단어장</h1>
+        <nav>
+          <Navigation />
+        </nav>
       </header>
-      <nav>
-        <Navigation />
-      </nav>
       <div className="wordBook-container">
+        <div className="create-newWordBook"></div>
         <AddWord onChangeWords={onChangeWords} />
         <WordList onReviseWord={onReviseWord} wordList={words} onRemoveWord={onRemoveWord} />
       </div>

@@ -25,10 +25,17 @@ const Gnb = () => {
   };
 
   return (
-    <div className="gnb">
-      <button onClick={createStudyGroup}>버튼</button>
-      <Link to="/">HOME</Link>
-      <Link to="/test">TEST</Link>
+    <div className="gnb-container">
+      <div className="logo gnb-item">
+        <Link to="/">Vocabulary</Link>
+      </div>
+      <div className="gnb gnb-item">
+        <Link to="/">HOME</Link>
+        <Link to="/test">TEST</Link>
+      </div>
+      <div className="user gnb-item">
+        <i class="far fa-user"></i>
+      </div>
     </div>
   );
 };

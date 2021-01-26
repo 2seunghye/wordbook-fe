@@ -6,6 +6,7 @@ import Gnb from './Components/Navigation/Gnb';
 
 import { HashRouter, Route } from 'react-router-dom';
 import TestComponents from './Components/WordTest/TestComponents';
+import AuthPage from './routes/AuthPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/test/choiceTest" component={TestComponents} />
       <Route path="/test/flashTest" component={TestComponents} />
       <Route path="/test/blinkerStudy" component={TestComponents} />
+      <Route path="/auth" exact={true} component={AuthPage} />
     </HashRouter>
   );
 };

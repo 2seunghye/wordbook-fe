@@ -46,12 +46,14 @@ const AddWord = (props) => {
 
   return (
     <div className="addWordForm">
-      <h2>단어추가</h2>
-      <label htmlFor="voca"></label>
-      <input type="text" id="voca" {...newVoca} placeholder="단어" />
-      <label htmlFor="meaning"></label>
-      <input type="text" id="meaning" {...newMeaning} placeholder="뜻" />
-      <button onClick={onCreateHandler}>추가</button>
+      <h2>Add Word</h2>
+      <div className="addWordInput">
+        <label htmlFor="voca"></label>
+        <input type="text" id="voca" {...newVoca} placeholder="단어" />
+        <label htmlFor="meaning"></label>
+        <input type="text" id="meaning" {...newMeaning} placeholder="뜻" />
+        <button onClick={onCreateHandler}>추가</button>
+      </div>
     </div>
   );
 };

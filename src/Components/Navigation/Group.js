@@ -9,7 +9,7 @@ const Group = (props) => {
 
   return (
     <div>
-      <div>{groupName}</div>
+      <h5 className="groupName">{groupName}</h5>
       <GroupWordBookList groupName={groupName} groupWordBookList={groupWordBookList} />
     </div>
   );

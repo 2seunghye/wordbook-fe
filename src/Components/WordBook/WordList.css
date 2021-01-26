@@ -1,0 +1,10 @@
+.WordList {
+}
+
+.WordList p {
+  text-align: end;
+  margin: 0 20px 20px 20px;
+  font-size: 13px;
+  color: #ffc55b;
+  font-weight: 600;
+}

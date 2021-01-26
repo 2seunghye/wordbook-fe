@@ -11,7 +11,9 @@ const Navigation = () => {
 
   return (
     <div className="navigation">
-      <button onClick={handleToggleHide}>{isHidden ? 'Show' : 'Hide'} Nav</button>
+      {/* <button className="nav-btn" onClick={handleToggleHide}>
+        {isHidden ? <i class="fas fa-chevron-left"></i> : <i class="fas fa-chevron-right"></i>}
+      </button> */}
       <div className={isHidden ? 'hidden' : ''}>
         <WordBookList />
       </div>

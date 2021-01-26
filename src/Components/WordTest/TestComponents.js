@@ -209,7 +209,6 @@ const TestComponents = (props) => {
       </div>
 
       {isFinish && <ResultComponent score={score} wrongWords={wrongWords} min={min} sec={sec} />}
-
       {!isFinish && renderTestDom()}
     </div>
   );

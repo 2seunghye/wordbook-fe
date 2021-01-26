@@ -6,9 +6,11 @@ const UserWordBookList = (props) => {
 
   return (
     <div className="userWordBookList">
+      <h5>내 단어장</h5>
       {userWordBookList.map((wordbook, index) => (
         <WordBook key={index} wordBook={wordbook} />
       ))}
+      <hr />
     </div>
   );
 };

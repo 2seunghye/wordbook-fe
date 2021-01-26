@@ -1,3 +1,61 @@
 .hidden {
   display: none;
 }
+
+.gnb-container {
+  background-color: #fff;
+  z-index: 10;
+  color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.gnb-item {
+  padding: 0 30px;
+  width: 33.3%;
+}
+
+.gnb {
+  text-align: center;
+}
+
+.gnb a {
+  margin: 0 20px;
+}
+
+.user {
+  text-align: end;
+}
+
+a,
+i {
+  color: #333;
+  text-decoration: none;
+}
+
+.navigation {
+  position: relative;
+}
+
+.nav-btn {
+  cursor: pointer;
+  position: absolute;
+  right: -20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+/* 
+#7971ea
+#808080 */

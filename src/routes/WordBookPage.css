@@ -1,0 +1,21 @@
+.wordBookPage {
+  width: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.wordBookPage header {
+  position: fixed;
+  top: 5%;
+  left: 10%;
+  padding: 80px 40px;
+}
+
+.wordBook-container {
+  width: 70%;
+  padding-left: 30%;
+  padding-right: 10%;
+  padding-top: 5%;
+}

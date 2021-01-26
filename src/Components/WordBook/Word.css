@@ -4,12 +4,14 @@
 }
 
 .word-card {
+  background-color: #fff;
   box-sizing: border-box;
   border: 1px solid #333;
   cursor: pointer;
   margin: 20px;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08);
 }
 
 .hidden span {
@@ -17,6 +19,10 @@
 }
 
 .meaning span {
-  color: yellowgreen;
+  color: #808080;
   font-weight: 700;
 }
+
+/* .Word {
+  border: 1px solid blue;
+} */

@@ -1,0 +1,46 @@
+.word-card {
+  border: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+}
+
+.voca {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  color: #808080;
+}
+
+.voca::after {
+  content: '';
+  height: 100%;
+  width: 1px;
+  margin-right: 20px;
+  background-color: #e9ecef;
+}
+
+.meaning {
+  width: 50%;
+}
+
+.word-container {
+  width: 80%;
+  display: flex;
+}
+
+.wordView-btn {
+  display: flex;
+}
+
+.wordView-btn button {
+  margin-left: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.wordView-btn i {
+  font-size: 14px;
+  color: #c5c5c5;
+}
